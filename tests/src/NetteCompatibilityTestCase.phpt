@@ -1,9 +1,7 @@
 <?php
 namespace LibretteTests\Application\PresenterFactory;
 
-use Librette\Application\PresenterFactory\IPresenterObjectFactory;
 use Librette\Application\PresenterFactory\PresenterFactory;
-use Nette;
 use Tester\Assert;
 use Tester\TestCase;
 
@@ -37,11 +35,11 @@ class NetteCompatibilityTestCase extends TestCase
 		]);
 
 
-		$this->assertFormatClasses('Foo2Presenter', 'Foo2');
-		$this->assertFormatClasses('App2\BarPresenter', 'Foo2:Bar');
-		$this->assertFormatClasses('App2\BarModule\BazPresenter', 'Foo2:Bar:Baz');
-		$this->assertFormatClasses('My\App\BarPresenter', 'Foo3:Bar');
-		$this->assertFormatClasses('My\App\BarModule\BazPresenter', 'Foo3:Bar:Baz');
+		$this->assert('Foo2Presenter', 'Foo2');
+		$this->assert('App2\BarPresenter', 'Foo2:Bar');
+		$this->assert('App2\BarModule\BazPresenter', 'Foo2:Bar:Baz');
+		$this->assert('My\App\BarPresenter', 'Foo3:Bar');
+		$this->assert('My\App\BarModule\BazPresenter', 'Foo3:Bar:Baz');
 
 	}
 
@@ -53,23 +51,25 @@ class NetteCompatibilityTestCase extends TestCase
 			'Foo3' => 'My\App\*Mod\*Presenter',
 		]);
 
-		$this->assertFormatClasses('FooPresenter', 'Foo');
-		$this->assertFormatClasses('FooModule\BarPresenter', 'Foo:Bar');
-		$this->assertFormatClasses('FooModule\BarModule\BazPresenter', 'Foo:Bar:Baz');
-		$this->assertFormatClasses('Foo2Presenter', 'Foo2');
-		$this->assertFormatClasses('App2\BarPresenter', 'Foo2:Bar');
-		$this->assertFormatClasses('App2\Bar\BazPresenter', 'Foo2:Bar:Baz');
-		$this->assertFormatClasses('My\App\BarPresenter', 'Foo3:Bar');
-		$this->assertFormatClasses('My\App\BarMod\BazPresenter', 'Foo3:Bar:Baz');
-		$this->assertFormatClasses('NetteModule\FooPresenter', 'Nette:Foo');
+		$this->assert('FooPresenter', 'Foo');
+		$this->assert('FooModule\BarPresenter', 'Foo:Bar');
+		$this->assert('FooModule\BarModule\BazPresenter', 'Foo:Bar:Baz');
+		$this->assert('Foo2Presenter', 'Foo2');
+		$this->assert('App2\BarPresenter', 'Foo2:Bar');
+		$this->assert('App2\Bar\BazPresenter', 'Foo2:Bar:Baz');
+		$this->assert('My\App\BarPresenter', 'Foo3:Bar');
+		$this->assert('My\App\BarMod\BazPresenter', 'Foo3:Bar:Baz');
+		$this->assert('NetteModule\FooPresenter', 'Nette:Foo');
 	}
 
 
-	private function assertFormatClasses($expectedClass, $presenterName)
+	private function assert($expectedClass, $presenterName)
 	{
 		$classes = $this->presenterFactory->formatPresenterClasses($presenterName);
 		Assert::same($expectedClass, reset($classes));
+		Assert::same($presenterName, $this->presenterFactory->unformatPresenterClass($expectedClass));
 	}
+
 }
 
 

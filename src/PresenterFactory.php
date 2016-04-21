@@ -164,6 +164,29 @@ class PresenterFactory extends Nette\Object implements Application\IPresenterFac
 
 
 	/**
+	 * Formats presenter name from class name.
+	 * @param  string
+	 * @return string
+	 */
+	public function unformatPresenterClass($class)
+	{
+		foreach ($this->mapping as $module => $mapping) {
+			foreach ($mapping as $m) {
+				if (is_string($m)) {
+					return $module;
+				}
+				$m = str_replace(['\\', '*'], ['\\\\', '(\w+)'], $m);
+				if (preg_match("#^\\\\?$m[0]((?:$m[1])*)$m[2]\\z#i", $class, $matches)) {
+					return ($module === '*' ? '' : $module . ':')
+					. preg_replace("#$m[1]#iA", '$1:', $matches[1])
+					. (isset($matches[3]) ? $matches[3] : '');
+				}
+			}
+		}
+	}
+
+
+	/**
 	 * @param array
 	 * @return string|null
 	 */
