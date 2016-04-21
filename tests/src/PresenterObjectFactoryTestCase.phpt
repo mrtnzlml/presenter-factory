@@ -50,8 +50,10 @@ class SystemContainer extends Nette\DI\Container
 
 	protected $meta = [
 		'types' => [
-			'librettetests\application\presenterfactory\presentermock' => ['fooPresenter'],
-		]
+			'LibretteTests\Application\PresenterFactory\PresenterMock' => [
+				1 => ['fooPresenter'],
+			],
+		],
 	];
 
 

@@ -78,11 +78,11 @@ class PresenterFactoryExtension extends Nette\DI\CompilerExtension
 	protected function getMappingConfig()
 	{
 		$globalConfig = $this->compiler->getConfig();
-		if (isset($globalConfig['nette']['application']['mapping']) && isset($globalConfig[$this->name]['mapping'])) {
-			throw new InvalidStateException("You cannot use both nette.application.mapping and {$this->name}.mapping config section, choose one.");
+		if (isset($globalConfig['application']['mapping']) && isset($globalConfig[$this->name]['mapping'])) {
+			throw new InvalidStateException("You cannot use both application.mapping and {$this->name}.mapping config section, choose one.");
 		}
 		$userConfig = isset($globalConfig[$this->name]['mapping']) ? $globalConfig[$this->name]['mapping'] :
-			(isset($globalConfig['nette']['application']['mapping']) ? $globalConfig['nette']['application']['mapping'] : []);
+			(isset($globalConfig['application']['mapping']) ? $globalConfig['application']['mapping'] : []);
 		$config = Nette\DI\Config\Helpers::merge($userConfig, $this->defaults['mapping']);
 
 		return $config;
