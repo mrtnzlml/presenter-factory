@@ -9,7 +9,11 @@
 		}
 	],
 	"require": {
-		"nette/nette": "~2.1"
+		"nette/di": "^2.3",
+		"nette/bootstrap": "^2.3",
+		"nette/application": "^2.3",
+		"nette/robot-loader": "^2.3",
+		"tracy/tracy": "^2.3"
 	},
 	"require-dev": {
 		"nette/tester": "@dev"
