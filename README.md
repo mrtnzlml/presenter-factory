@@ -1,5 +1,7 @@
 # Enhanced presenter factory for Nette Framework
 
+[![Build Status](https://travis-ci.org/mrtnzlml/presenter-factory.svg?branch=master)](https://travis-ci.org/mrtnzlml/presenter-factory)
+
 Nette Framework does have very simple presenter factory which helps you to map namespaces of presenters to the presenter name and vice versa.
 Unfortunately it's not possible to map two namespaces under one module section:
 
