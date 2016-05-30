@@ -93,6 +93,6 @@ class PresenterFactoryExtension extends Nette\DI\CompilerExtension
 	{
 		$serviceDef = new Nette\DI\ServiceDefinition();
 
-		return $serviceDef->inject == FALSE;
+		return $serviceDef->getInject();
 	}
 }
