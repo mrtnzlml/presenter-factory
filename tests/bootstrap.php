@@ -5,7 +5,7 @@ if (!$loader = include __DIR__ . '/../vendor/autoload.php') {
 }
 $loader->addPsr4('LibretteTests\\Application\\PresenterFactory\\', __DIR__ . '/src/');
 
-Tracy\Debugger::enable(Tracy\Debugger::DEVELOPMENT, __DIR__ . '/tmp/');
+//Tracy\Debugger::enable(Tracy\Debugger::DEVELOPMENT, __DIR__ . '/tmp/');
 Tester\Environment::setup();
 date_default_timezone_set('Europe/Prague');
 define('TEMP_DIR', __DIR__ . '/tmp/' . (isset($_SERVER['argv']) ? md5(serialize($_SERVER['argv'])) : getmypid()));
@@ -18,5 +18,15 @@ $_ENV = $_GET = $_POST = [];
 
 function run(Tester\TestCase $testCase)
 {
-	$testCase->run(isset($_SERVER['argv'][1]) ? $_SERVER['argv'][1] : NULL);
+	if (isset($_SERVER['argv'][1])) {
+		$method = $_SERVER['argv'][1];
+		if ($method !== '--method=nette-tester-list-methods') {
+			$method = preg_replace('~^--method=([a-z_]+)~i', '$1', $method);
+			$testCase->runTest($method);
+		} else {
+			$testCase->run();
+		}
+	} else {
+		$testCase->run();
+	}
 }
