@@ -23,5 +23,6 @@
 			"Librette\\Application\\PresenterFactory\\": "src/"
 		},
 		"files": ["src/exceptions.php"]
-	}
+	},
+	"minimum-stability": "stable"
 }
