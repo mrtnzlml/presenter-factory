@@ -9,20 +9,10 @@
 		}
 	],
 	"require": {
-		"nette/di": "^2.3",
-		"nette/bootstrap": "^2.3",
-		"nette/application": "^2.3",
-		"nette/robot-loader": "^2.3",
-		"tracy/tracy": "^2.3"
+		"adeira/presenter-factory": "^1.0"
 	},
 	"require-dev": {
 		"nette/tester": "@dev"
-	},
-	"autoload": {
-		"psr-4": {
-			"Librette\\Application\\PresenterFactory\\": "src/"
-		},
-		"files": ["src/exceptions.php"]
 	},
 	"minimum-stability": "stable"
 }
